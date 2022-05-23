@@ -1,0 +1,1 @@
+模型可在：[https://huggingface.co/bert-base-chinese](https://huggingface.co/bert-base-chinese)下载。
