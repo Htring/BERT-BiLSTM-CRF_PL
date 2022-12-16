@@ -10,12 +10,14 @@ NER任务毋庸多言，之前也是从HMM，BiLSTM-CRF，IDCNN-CRF一路实现�
 
 ## 主要程序包依赖
 
+```text
 pytorch-crf             0.7.2
 pytorch-lightning       1.5.0
 torch                   1.10.0
 torchmetrics            0.10.3
 torchtext               0.11.0
 transformers            4.24.0
+```
 
 预训练模型需要放在：`pre_model/bert-base-chinese`，也可以根据自己的情况进行调整。
 
