@@ -32,7 +32,7 @@ def train(args):
     else:
         model = BERTBiLSTMCRF_PL(args)
     lr_logger = LearningRateMonitor()
-    checkpoint_callback = ModelCheckpoint(save_top_k=3,
+    checkpoint_callback = ModelCheckpoint(save_top_k=2,
                                           monitor="val_f1",
                                           mode="max",
                                           dirpath=path_prefix,
@@ -90,19 +90,19 @@ def model_use(param):
 
 if __name__ == '__main__':
     parser = ArgumentParser()
-    parser.add_argument("--batch_size", type=int, default=10)
-    parser.add_argument("--load_pre", default=True, action="store_true")
-    parser.add_argument("--ckpt_path", type=str, default="model_save/ner-epoch=019-val_f1=0.936.ckpt")
+    parser.add_argument("--batch_size", type=int, default=32)
+    parser.add_argument("--load_pre", default=False, action="store_true")
+    parser.add_argument("--ckpt_path", type=str, default="")  # 模型训练完后使用对应的ckpt路径
     parser.add_argument("--test", action="store_true", default=True)
-    parser.add_argument("--train", action="store_true", default=False)
+    parser.add_argument("--train", action="store_true", default=True)
     parser.add_argument("--save_state_dict", default=True, action="store_true")
     parser.add_argument("--data_dir", default="data/corpus", type=str, help="train data dir")
     parser.add_argument("--max_seq_length", default=128, type=int, help="sentence max length")
     parser.add_argument("--pre_train_path", default="pre_model/bert-base-chinese", type=str)
     parser.add_argument("--model_name_or_path", default="bert_bilstm_crf", type=str)
     parser.add_argument("--overwrite_cache", default=False, type=bool)
-    parser.add_argument("--epoch", default=50, type=int)
+    parser.add_argument("--epoch", default=20, type=int)
     parser = BERTBiLSTMCRF_PL.add_model_specific_args(parser)
     params = parser.parse_args()
-    # train(params)
-    model_use(params)
+    train(params)
+    # model_use(params)
